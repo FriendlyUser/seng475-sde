@@ -1,14 +1,13 @@
-FROM ubuntu:18.04
+FROM python:3.6
 
 # Make new directory for the files
-# RUN mkdir sde 
-# RUN ls
+ENV HOME /seng475
+WORKDIR /seng475
 
 # Copy the installation files over
 COPY / .
 RUN ls
 
 # Make new directory for installation
-
-RUN ./installer -d seng475
+RUN ./installer -d sde
 
