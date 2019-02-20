@@ -19,6 +19,8 @@ build:
     - docker tag "$CI_REGISTRY_IMAGE" "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
   when: manual
+  tags:
+    - seng475
  
 release-tagged-image:
   stage: build
