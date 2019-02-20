@@ -5,5 +5,8 @@ WORKDIR /seng475
 
 RUN ls 
 COPY . /
+RUN ls 
+COPY / .
+RUN ls
 RUN ./installer -d sde
 
