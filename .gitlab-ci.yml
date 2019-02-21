@@ -15,7 +15,7 @@ before_script:
 build:
   stage: build
   script:
-    - docker build -t seng475-sde:latest .
+    - docker build -t grandfleet/seng475-sde:latest .
     - docker tag grandfleet/seng475-sde:latest grandfleet/seng475-sde:latest
     - docker push grandfleet/seng475-sde:latest
   when: manual
