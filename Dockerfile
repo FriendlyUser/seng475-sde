@@ -6,4 +6,4 @@ COPY / .
 RUN ls
 
 # Make new directory for installation
-RUN ./installerRest -d /usr/local/sde -e default -f || true
+RUN chmod +x installerRest && ./installerRest -d /usr/local/sde -e default -f || true
