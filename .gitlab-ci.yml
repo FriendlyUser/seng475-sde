@@ -25,9 +25,9 @@ build:
 release-tagged-image:
   stage: build
   script:
-    - docker build -t grandfleet/seng475-sde:4.0.13 .
-    - docker tag grandfleet/seng475-sde:4.0.13 grandfleet/seng475-sde:4.0.13
-    - docker push grandfleet/seng475-sde:4.0.13
+    - docker build -t grandfleet/seng475-sde:4.0.13-new .
+    - docker tag grandfleet/seng475-sde:4.0.13-new -grandfleet/seng475-sde:4.0.13-new
+    - docker push grandfleet/seng475-sde:4.0.13-new
   only:
     - master
   when: manual
