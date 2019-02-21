@@ -34,3 +34,12 @@ release-tagged-image:
   tags:
     - seng475
 
+release-tagged-image:
+  stage: build
+  script:
+    - docker build -t grandfleet/seng475-sde:test-halfC .
+    - docker tag grandfleet/seng475-sde:test-halfC -grandfleet/seng475-sde:test-halfC
+    - docker push grandfleet/seng475-sde:test-halfC
+  only:
+    - master
+  when: manual
