@@ -15,9 +15,9 @@ before_script:
 build:
   stage: build
   script:
-    - docker build -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-    - docker tag "$CI_REGISTRY_IMAGE" "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+    - docker build -t seng475-sde:latest .
+    - docker tag grandfleet/seng475-sde:latest grandfleet/seng475-sde:latest
+    - docker push grandfleet/seng475-sde:latest
   when: manual
   tags:
     - seng475
