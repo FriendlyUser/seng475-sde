@@ -5,5 +5,4 @@ COPY / .
 RUN ls
 
 # Make new directory for installation
-RUN ./installer -d .
-
+RUN ./installer -d /usr/local/bin
