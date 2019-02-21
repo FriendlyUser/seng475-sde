@@ -25,10 +25,12 @@ build:
 release-tagged-image:
   stage: build
   script:
-    - docker build -t grandfleet/dolwarp:v0.66 .
-    - docker tag grandfleet/dolwarp:v0.66 grandfleet/dolwarp:v0.66
-    - docker push grandfleet/dolwarp:v0.66
+    - docker build -t grandfleet/seng475-sde:4.0.13 .
+    - docker tag grandfleet/seng475-sde:4.0.13 grandfleet/seng475-sde:4.0.13
+    - docker push grandfleet/seng475-sde:4.0.13
   only:
     - master
   when: manual
+  tags:
+    - seng475
 
