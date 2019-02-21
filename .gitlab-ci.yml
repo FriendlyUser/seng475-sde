@@ -34,11 +34,11 @@ release-tagged-image:
   tags:
     - seng475
 
-test-image:
+gitlab-runner-test:
   stage: build
   script:
     - docker build -t grandfleet/seng475-sde:V0.0.1 .
-    - docker tag grandfleet/seng475-sde:V0.0.1 grandfleet/seng475-sde:
+    - docker tag grandfleet/seng475-sde:V0.0.1 grandfleet/seng475-sde:V0.0.1
     - docker push grandfleet/seng475-sde:V0.0.1
   only:
     - master
