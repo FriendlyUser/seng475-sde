@@ -1,7 +1,7 @@
 FROM python:3.6
 
 
-# WORKDIR /sde
+WORKDIR /sde
 # Copy the installation files over
 COPY / .
 RUN ls
