@@ -5,4 +5,4 @@ COPY / .
 RUN ls
 
 # Make new directory for installation
-RUN ./installer -d /usr/local/sde -e default || true
+RUN ./installer -d /usr/local/bin -e default -f || true
