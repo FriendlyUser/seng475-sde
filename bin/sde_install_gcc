@@ -162,7 +162,7 @@ if [ $from_repo -ne 0 ]; then
 	svn co "$svn_repo" "$src_dir" || panic "cannot checkout source"
 else
 	url="https://ftp.gnu.org/gnu/gcc/gcc-$version/gcc-$version.tar.xz"
-	(cd "$archive_dir" && wget "$url" ) || \
+	(cd "$archive_dir" && wget --no-check-certificate "$url" ) || \
 	  panic "cannot download archive"
 	archive_file="$archive_dir/gcc-$version.tar.xz"
 	tar -xJf "$archive_file" -C "$src_dir" --strip-components=1 || \
