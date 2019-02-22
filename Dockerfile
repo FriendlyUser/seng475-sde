@@ -1,6 +1,8 @@
 FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+gpg dirmngr gpg-agent build-essential checkinstall tk-dev \
+libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev \
 ca-certificates \
 wget \
 xz-utils \
