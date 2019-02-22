@@ -1,9 +1,9 @@
 FROM grandfleet/seng475-sde:t02212019
 # RUN apt-get update && apt-get install python-dev -y
-WORKDIR /sde
+# WORKDIR /sde
 # Copy the installation files over
 COPY / .
 RUN rm -rf .git && ls 
 
 # Make new directory for installation
-RUN chmod +x installerTexLive && ./installerTexLive -d /usr/local/sde -e default -f || true
+RUN chmod +x installer && ./installer -d /usr/local/sde -e default -f || true
