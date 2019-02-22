@@ -1,9 +1,7 @@
-FROM ubuntu:18.04
-
-ARG DEBIAN_FRONTEND=noninteractive
+FROM ubuntu:14.04
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-wget gpg dirmngr gpg-agent build-essential checkinstall tk-dev \
+gpg dirmngr gpg-agent build-essential checkinstall tk-dev \
 libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev \
 libgdbm-dev libc6-dev libbz2-dev \
 python-dev \
