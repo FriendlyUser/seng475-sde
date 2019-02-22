@@ -1,7 +1,6 @@
-FROM python:3.6
+FROM ubuntu:18.04
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-wget \
+RUN apt-get update && apt-get install -y 
 python-dev \
 python3 \
 texinfo 
