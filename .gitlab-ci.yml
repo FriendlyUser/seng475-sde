@@ -2,6 +2,10 @@
 # Official docker image.
 image: docker:latest
 
+stages:
+  - build
+  - test 
+
 services:
   - docker:dind
 
@@ -65,3 +69,10 @@ gitlab-runner-test-tl:
     - docker push grandfleet/seng475-sde:V0.0.2
   only:
     - master
+    
+test-install:
+  stage: test
+  image: grandfleet/seng475-sde:4.0.13  
+  script:
+    - gcc --version 
+    - cmake --version
