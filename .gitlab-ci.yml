@@ -35,7 +35,6 @@ release-tagged-image:
     - docker push grandfleet/seng475-sde:HLBF2019
   only:
     - master
-  when: manual
   tags:
     - seng475
 

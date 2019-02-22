@@ -129,7 +129,7 @@ cmake_arch="$arch"
 
 short_version=$(echo "$version" | sed -e 's/\.[0-9]*$//') || \
   panic "cannot extract short version"
-url="https://cmake.org/files/v$short_version/cmake-$version-$cmake_os-$cmake_arch.tar.gz --no-check-certificate"
+url="https://cmake.org/files/v$short_version/cmake-$version-$cmake_os-$cmake_arch.tar.gz"
 echo "$basename"
 archive=$(basename $url) || panic "cannot extract archive name"
 
@@ -140,7 +140,7 @@ fi
 mkdir -p "$tmp_dir" || \
   panic "cannot make temporary directory $tmp_dir"
 
-(cd "$tmp_dir" && wget "$url") || \
+(cd "$tmp_dir" && wget --no-check-certificate "$url") || \
   panic "cannot download archive"
 
 mkdir -p "$install_dir" || \
