@@ -1,9 +1,7 @@
-FROM ubuntu:14.04
+FROM python:3.6
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-wget dirmngr build-essential checkinstall tk-dev \
-libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev \
-libgdbm-dev libc6-dev libbz2-dev \
+wget \
 python-dev \
 python3 \
 texinfo 
