@@ -7,8 +7,8 @@ wget gpg dirmngr gpg-agent build-essential checkinstall tk-dev \
 libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev \
 libgdbm-dev libc6-dev libbz2-dev \
 python-dev \
-install python3 \
-install texinfo 
+python3 \
+texinfo 
 WORKDIR /sde
 # Copy the installation files over
 COPY / .
