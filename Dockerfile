@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-gpg dirmngr gpg-agent build-essential checkinstall tk-dev \
+wget dirmngr build-essential checkinstall tk-dev \
 libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev \
 libgdbm-dev libc6-dev libbz2-dev \
 python-dev \
