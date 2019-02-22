@@ -54,7 +54,7 @@ release-tagged-image-tl:
 gitlab-runner-test:
   stage: build
   script:
-    - docker build -t grandfleet/seng475-sde:V0.0.15 .
+    - docker build -t grandfleet/seng475-sde:V0.0.15 -f DockerfileHalfInstallFull .
     - docker tag grandfleet/seng475-sde:V0.0.15 grandfleet/seng475-sde:V0.0.15
     - docker push grandfleet/seng475-sde:V0.0.15
   only:
