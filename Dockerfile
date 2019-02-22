@@ -1,6 +1,6 @@
 FROM python:3.6
 RUN apt-get update && apt-get install python-dev -y && apt-get install texinfo -y
-# WORKDIR /sde
+WORKDIR /sde
 # Copy the installation files over
 COPY / .
 RUN ls
