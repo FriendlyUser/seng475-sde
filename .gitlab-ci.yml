@@ -77,3 +77,4 @@ test-install:
   script:
     - gcc --version 
     - cmake --version
+  when: manual
