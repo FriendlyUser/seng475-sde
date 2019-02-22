@@ -140,7 +140,7 @@ fi
 mkdir -p "$tmp_dir" || \
   panic "cannot make temporary directory $tmp_dir"
 
-(cd "$tmp_dir" && wget --no-check-certificate "$url") || \
+(cd "$tmp_dir" && wget "$url") || \
   panic "cannot download archive"
 
 mkdir -p "$install_dir" || \
