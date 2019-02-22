@@ -64,9 +64,9 @@ gitlab-runner-test:
 gitlab-runner-test-tl:
   stage: build
   script:
-    - docker build -t grandfleet/seng475-sde:V0.0.2 -f DockerfileTexLiveInstall .
-    - docker tag grandfleet/seng475-sde:V0.0.2 grandfleet/seng475-sde:V0.0.2
-    - docker push grandfleet/seng475-sde:V0.0.2
+    - docker build -t grandfleet/seng475-sde:V0.0.3 -f DockerfileTexLiveInstall .
+    - docker tag grandfleet/seng475-sde:V0.0.3 grandfleet/seng475-sde:V0.0.2
+    - docker push grandfleet/seng475-sde:V0.0.3
   only:
     - master
     
