@@ -129,7 +129,7 @@ cmake_arch="$arch"
 
 short_version=$(echo "$version" | sed -e 's/\.[0-9]*$//') || \
   panic "cannot extract short version"
-url="https://cmake.org/files/v$short_version/cmake-$version-$cmake_os-$cmake_arch.tar.gz"
+url="http://cmake.org/files/v$short_version/cmake-$version-$cmake_os-$cmake_arch.tar.gz"
 echo "$basename"
 archive=$(basename $url) || panic "cannot extract archive name"
 
