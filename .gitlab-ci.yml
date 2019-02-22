@@ -21,7 +21,8 @@ build:
   when: manual
   tags:
     - seng475
- 
+
+# Got up to tex live 
 release-tagged-image:
   stage: build
   script:
@@ -34,11 +35,33 @@ release-tagged-image:
   tags:
     - seng475
 
+release-tagged-image-tl:
+  stage: build
+  script:
+    - docker build -t grandfleet/seng475-sde:tTL02212019 -f DockerfileTexLiveInstall .
+    - docker tag grandfleet/seng475-sde:tTL02212019 grandfleet/seng475-sde:tTL02212019
+    - docker push grandfleet/seng475-sde:tTL02212019
+  only:
+    - master
+  when: manual
+  tags:
+    - seng475
+
 gitlab-runner-test:
   stage: build
   script:
     - docker build -t grandfleet/seng475-sde:V0.0.1 .
     - docker tag grandfleet/seng475-sde:V0.0.1 grandfleet/seng475-sde:V0.0.1
     - docker push grandfleet/seng475-sde:V0.0.1
+  only:
+    - master
+  when: manual
+
+gitlab-runner-test-tl:
+  stage: build
+  script:
+    - docker build -t grandfleet/seng475-sde:V0.0.2 -f DockerfileTexLiveInstall .
+    - docker tag grandfleet/seng475-sde:V0.0.2 grandfleet/seng475-sde:V0.0.2
+    - docker push grandfleet/seng475-sde:V0.0.2
   only:
     - master
