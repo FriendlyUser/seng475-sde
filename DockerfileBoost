@@ -6,6 +6,7 @@ COPY / .
 
 RUN python3 --version && python --version
 
+RUN chmod +x checkFolder
 RUN  ./checkFolder.sh /usr/local/bin/cmake &&  ./checkFolder.sh /usr/local/sde/bin/cmake
 RUN cd /usr/local/sde && ls 
 RUN cd /usr/local/sde/bin && echo "export PATH=\$PATH:$(pwd)" >> ~/.bashrc
@@ -16,4 +17,4 @@ RUN cmake --version && gcc --version
 RUN clang --version
 
 # Make new directory for installation
-RUN chmod +x installer && ./installer -d /usr/local/sde -e default -f || true
+RUN chmod +x installer && ./installer -d /usr/local/sde -e default -f
