@@ -519,9 +519,11 @@ fi
 # Install TeX Live
 ################################################################################
 
+# Shell command cannot install iso
+dockermode=0
 if [ "$enable_texlive_install" -ne 0 ]; then
   
-	if [ 1 -ne 0 ]; then
+	if [ "$dockermode" -ne 0 ]; then
 		if [ ! -d "$texlive_iso_dir" ]; then
 			"$sde_download_texlive_iso" -v "$texlive_version" \
 			  -o "$texlive_iso_dir/texlive.iso" || \
