@@ -37,6 +37,7 @@ release-tagged-image:
     - master
   tags:
     - seng475
+  when: manual
 
 boost-and-after:
   stage: build
