@@ -255,6 +255,7 @@ if [ "$clean" -ne 0 ]; then
 
 fi
 
+sdebase_installed=1
 # Link a bunch of files
 if [ "$sdebase_installed" -ne 0 ]; then
 
