@@ -9,6 +9,6 @@ else
         echo "${PASSED} is a file";
     else
         echo "${PASSED} is not valid";
-        exit 1
+        exit 0
     fi
 fi

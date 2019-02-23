@@ -7,7 +7,7 @@ COPY / .
 RUN python3 --version && python --version
 
 RUN chmod +x checkFolder.sh
-RUN  ./checkFolder.sh /usr/local/bin/cmake &&  ./checkFolder.sh /usr/local/sde/bin/cmake
+RUN  ./checkFolder.sh /usr/local/sde/bin/cmake
 RUN cd /usr/local/sde && ls 
 RUN cd /usr/local/sde/bin && echo "export PATH=\$PATH:$(pwd)" >> ~/.bashrc
 RUN source ~/.bashrc 
