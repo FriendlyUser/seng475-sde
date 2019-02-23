@@ -62,6 +62,7 @@ full-build:
     - master
   tags:
     - seng475
+  when: manual
 
 release-tagged-image-tl:
   stage: build
