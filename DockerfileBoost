@@ -5,7 +5,7 @@ ENV INSTALL_DIR "/usr/local/sde"
 WORKDIR /boost-install
 COPY / .
 RUN python3 --version && python --version
-
+RUN apt-get update && apt-get install git -y
 RUN echo $PATH
 
 # Make new directory for installation

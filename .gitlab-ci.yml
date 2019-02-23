@@ -49,6 +49,18 @@ boost-and-after:
     - master
   tags:
     - seng475
+  allow_failure: true
+
+full-build:
+  stage: test
+  script:
+    - docker build -t grandfleet/seng475-sde:fullsde .
+    - docker tag grandfleet/seng475-sde:fullsde grandfleet/seng475-sde:fullsde
+    - docker push grandfleet/seng475-sde:fullsde
+  only:
+    - master
+  tags:
+    - seng475
 
 release-tagged-image-tl:
   stage: build

@@ -10,6 +10,7 @@ wget \
 xz-utils \
 python-dev \
 python3 \
+git \ 
 texinfo 
 WORKDIR /sde
 # Copy the installation files over
