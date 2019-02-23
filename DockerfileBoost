@@ -9,7 +9,7 @@ RUN python3 --version && python --version
 RUN echo $PATH
 
 # Make new directory for installation
-RUN chmod +x installerRest && ./installerRest -d INSTALL_DIR -e default -f
+RUN chmod +x installerRest && ./installerRest -d $INSTALL_DIR -e default -f
 
 RUN cmake --version 
 RUN gcc --version
