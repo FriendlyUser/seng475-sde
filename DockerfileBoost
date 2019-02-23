@@ -7,8 +7,8 @@ COPY / .
 RUN python3 --version && python --version
 
 RUN cd /usr/local/sde/bin && ls 
-RUN ln -s /usr/local/sde/bin/cmake cmake
-RUN ln -s /usr/local/sde/bin/clang clang
+RUN ln -s /usr/local/sde/bin/cmake /usr/local/bin/cmake
+RUN ln -s /usr/local/sde/bin/clang /usr/local/bin/clang
 
 
 RUN cmake --version && gcc --version
