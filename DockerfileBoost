@@ -1,6 +1,8 @@
 FROM grandfleet/seng475-sde:HLBF2019
 
 ENV PATH "$PATH:/usr/local/sde/bin"
+ENV SDE_CLANG_CXX_PROGRAM "/usr/local/sde/bin/clang"
+ENV SDE_CMAKE_PROGRAM "/usr/local/sde/bin/cmake"
 
 WORKDIR /boost-install
 
