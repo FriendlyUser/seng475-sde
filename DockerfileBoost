@@ -1,0 +1,14 @@
+FROM grandfleet/seng475-sde:HLBF2019
+
+WORKDIR /boost-install
+
+COPY / .
+
+RUN python3 --version && python --version
+
+RUN cmake --version && gcc --version
+
+RUN clang --version
+
+# Make new directory for installation
+RUN chmod +x installer && ./installer -d /usr/local/sde -e default -f || true

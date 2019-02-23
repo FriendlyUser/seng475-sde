@@ -102,7 +102,7 @@ filename_version=$(echo "$version" | tr . _) || panic "failed"
 
 url="https://sourceforge.net/projects/boost/files/boost/$version/boost_${filename_version}.tar.gz"
 
-(cd "$archive_dir" && wget "$url" ) || \
+(cd "$archive_dir" && wget  --no-check-certificate "$url" ) || \
   panic "cannot download archive"
 
 archive_file="$archive_dir/boost_${filename_version}.tar.gz"

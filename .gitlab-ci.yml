@@ -38,6 +38,17 @@ release-tagged-image:
   tags:
     - seng475
 
+boost-and-after:
+  stage: build
+  script:
+    - docker build -t grandfleet/seng475-sde:AfterBoostsde -f DockerfileBoost .
+    - docker tag grandfleet/seng475-sde:AfterBoostsde grandfleet/seng475-sde:AfterBoostsde
+    - docker push grandfleet/seng475-sde:AfterBoostsde
+  only:
+    - master
+  tags:
+    - seng475
+
 release-tagged-image-tl:
   stage: build
   script:
