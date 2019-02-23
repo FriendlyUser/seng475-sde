@@ -6,10 +6,10 @@ COPY / .
 
 RUN python3 --version && python --version
 
-RUN chmod +x checkFolder.sh
 RUN cd /usr/local/sde/bin && ls 
-RUN cd /usr/local/sde/bin && echo "export PATH=\$PATH:$(pwd)" >> ~/.bashrc
-RUN . ~/.bashrc 
+RUN ln -s /usr/local/sde/bin/cmake cmake
+RUN ln -s /usr/local/sde/bin/clang clang
+
 
 RUN cmake --version && gcc --version
 
