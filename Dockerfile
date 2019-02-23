@@ -19,4 +19,4 @@ COPY / .
 RUN python3 --version && python --version
 
 # Make new directory for installation
-RUN chmod +x installer && ./installer -d /usr/local/sde -e default -f || true
+RUN chmod +x installerDLI && ./installerDLI -d /usr/local/sde -e default -f || true

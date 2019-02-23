@@ -50,9 +50,10 @@ boost-and-after:
   tags:
     - seng475
   allow_failure: true
+  when: manual
 
 full-build:
-  stage: test
+  stage: build
   script:
     - docker build -t grandfleet/seng475-sde:fullsde .
     - docker tag grandfleet/seng475-sde:fullsde grandfleet/seng475-sde:fullsde

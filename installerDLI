@@ -520,24 +520,10 @@ fi
 ################################################################################
 
 if [ "$enable_texlive_install" -ne 0 ]; then
-  
-	if [ 1 -ne 0 ]; then
-		if [ ! -d "$texlive_iso_dir" ]; then
-			"$sde_download_texlive_iso" -v "$texlive_version" \
-			  -o "$texlive_iso_dir/texlive.iso" || \
-			  panic "cannot download texlive_iso"
-		fi
-		if [ ! -d "$texlive_dir" ]; then
-			"$sde_install_texlive_iso" -i "$texlive_iso_dir/texlive.iso" \
-			  -d "$texlive_dir" || \
-			  panic "cannot install texlive"
-		fi
-	else
-		if [ ! -d "$texlive_dir" ]; then
-			"$sde_install_texlive" -v "$texlive_version" -d "$texlive_dir" || \
-			  panic "cannot install texlive"
-		fi
-	fi
+  if [ ! -d "$texlive_dir" ]; then
+    "$sde_install_texlive" -v "$texlive_version" -d "$texlive_dir" || \
+      panic "cannot install texlive" || true
+  fi
 	"$sde_cmd" pkg -d "$sde_top_dir" texlive "$texlive_version" || \
 	  panic "cannot configure texlive"
 fi
@@ -562,7 +548,7 @@ if [ -n "$jasper_dir" ]; then
 		PATH="${path_string}$PATH" \
 		  "$sde_install_jasper" -v "$jasper_version" -d "$jasper_dir" \
 		  "${options[@]}" || \
-		  panic "cannot install jasper"
+		  panic "cannot install jasper" || true
 	fi
 	"$sde_cmd" pkg -d "$sde_top_dir" jasper "$jasper_version" || \
 	  panic "cannot configure jasper"
