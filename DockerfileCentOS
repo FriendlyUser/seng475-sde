@@ -1,0 +1,23 @@
+FROM centos:6
+
+RUN yum install -y  ca-certificates \
+wget \ 
+xz-utils \
+python-dev \
+python3 \
+git \ 
+texinfo \
+libeigen3-dev \
+libcgal-dev \
+gcc 
+
+# https://github.com/PX4/Firmware/issues/6408
+# libeigen3-dev libcgal-dev packages inside
+WORKDIR /sde
+# Copy the installation files over
+COPY / .
+
+RUN python3 --version && python --version
+
+# Make new directory for installation
+RUN chmod +x installerDLI && ./installerDLI -d /usr/local/sde -e default -f || true
