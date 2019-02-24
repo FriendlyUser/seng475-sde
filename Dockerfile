@@ -14,8 +14,7 @@ git \
 texinfo \
 libeigen3-dev \
 libcgal-dev \ 
-gdb \
-&& rm -rf /var/lib/apt/lists/* \
+gdb 
 
 # https://github.com/PX4/Firmware/issues/6408
 # libeigen3-dev libcgal-dev packages inside

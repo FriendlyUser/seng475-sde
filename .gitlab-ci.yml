@@ -65,6 +65,15 @@ full-build:
   # when: manual
 
 full-build-centos:
+  stage: build
+  script:
+    - docker build -t grandfleet/seng475-sde:fullsdeost -f DockerfileCentOS .
+    - docker tag grandfleet/seng475-sde:fullsdeost grandfleet/seng475-sde:fullsdeost
+    - docker push grandfleet/seng475-sde:fullsdeost
+  only:
+    - master
+    
+full-build-centos:
   stage: test
   script:
     - docker build -t grandfleet/seng475-sde:fullsdeos -f DockerfileCentOS .

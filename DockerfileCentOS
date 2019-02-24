@@ -1,23 +1,10 @@
-FROM centos:6
-
-RUN yum -y update &&  yum -y install yum-utils && yum -y groupinstall development && yum -y install https://centos7.iuscommunity.org/ius-release.rpm && yum install -y ca-certificates \
-wget \ 
-xz-utils \
-python27u \
-python36u \
-git \ 
-texinfo \
-libeigen3-dev \
-libcgal-dev \
-gcc 
+FROM centos/python-36-centos7
 
 # https://github.com/PX4/Firmware/issues/6408
 # libeigen3-dev libcgal-dev packages inside
 WORKDIR /sde
 # Copy the installation files over
 COPY / .
-
-RUN python3 --version && python --version
 
 # Make new directory for installation
 RUN chmod +x installerDLI && ./installerDLI -d /usr/local/sde -e default -f || true
