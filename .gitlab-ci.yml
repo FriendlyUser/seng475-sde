@@ -62,9 +62,9 @@ full-build:
     - master
   tags:
     - seng475
-  # when: manual
+  when: manual
 
-full-build-centos:
+full-build-centos-epic:
   stage: build
   script:
     - docker build -t grandfleet/seng475-sde:fullsdeost -f DockerfileCentOS .
