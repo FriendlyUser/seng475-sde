@@ -255,6 +255,7 @@ sde_path_prefix="$sde_top_dir/bin"
 
 # Read settings from configuration file.
 config_file="$cmd_dir/../etc/environments/$name"
+echo "$config_file"
 if [ ! -f "$config_file" ]; then
 	panic "no such environment $name"
 fi

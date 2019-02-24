@@ -76,7 +76,7 @@ vimlsp_aclsp_version=6f47fcb2f386c6234f65a9450c3a3c141759a8f3
 panic()
 {
 	echo "FATAL ERROR: $@" 1>&2
-	exit 1
+	# exit 1
 }
 
 eprint()

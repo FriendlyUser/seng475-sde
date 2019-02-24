@@ -14,7 +14,9 @@ git \
 texinfo \
 libeigen3-dev \
 libcgal-dev \ 
-gdb 
+gdb \
+reeglut3-dev \
+libgl1-mesa-dev 
 
 # https://github.com/PX4/Firmware/issues/6408
 # libeigen3-dev libcgal-dev packages inside
