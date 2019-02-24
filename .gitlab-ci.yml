@@ -74,6 +74,8 @@ full-build-centos:
     - master
   tags:
     - seng475
+  dependencies:
+    - full-build
   
 release-tagged-image-tl:
   stage: build
