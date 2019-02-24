@@ -496,10 +496,10 @@ fi
 if [ -n "$gdb_dir" ]; then
 	if [ ! -d "$gdb_dir" ]; then
 		"$sde_install_gdb" -v "$gdb_version" -d "$gdb_dir" || \
-		  panic "cannot install gdb"
+		  panic "cannot install gdb" || true
 	fi
 	"$sde_cmd" pkg -d "$sde_top_dir" gdb "$gdb_version" || \
-	  panic "cannot configure gdb"
+	  panic "cannot configure gdb" || true
 fi
 
 ################################################################################
@@ -586,10 +586,10 @@ if [ -n "$spl_dir" ]; then
 		fi
 		PATH="$gcc_bin_dir:${path_string}$PATH" \
 		  "$sde_install_spl" -v "$spl_version" -d "$spl_dir" "${options[@]}" || \
-		  panic "cannot install SPL"
+		  panic "cannot install SPL" || true
 	fi
 	"$sde_cmd" pkg -d "$sde_top_dir" SPL "$spl_version" || \
-	  panic "cannot configure SPL"
+	  panic "cannot configure SPL" || true
 fi
 
 ################################################################################
@@ -600,10 +600,10 @@ if [ -n "$gsl_dir" ]; then
 	if [ ! -d "$gsl_dir" ]; then
 		PATH="$gcc_bin_dir:$PATH" \
 		  "$sde_install_gsl" -v "$gsl_version" -d "$gsl_dir" || \
-		  panic "cannot install GSL"
+		  panic "cannot install GSL" || true
 	fi
 	"$sde_cmd" pkg -d "$sde_top_dir" gsl "$gsl_version" || \
-	  panic "cannot configure GSL"
+	  panic "cannot configure GSL" || true
 fi
 
 ################################################################################
@@ -613,10 +613,10 @@ fi
 if [ -n "$catch_dir" ]; then
 	if [ ! -d "$catch_dir" ]; then
 		"$sde_install_catch" -v "$catch_version" -d "$catch_dir" || \
-		  panic "cannot install catch"
+		  panic "cannot install catch" || true
 	fi
 	"$sde_cmd" pkg -d "$sde_top_dir" catch "$catch_version" || \
-	  panic "cannot configure Catch"
+	  panic "cannot configure Catch" || true
 fi
 
 ################################################################################
@@ -626,10 +626,10 @@ fi
 if [ -n "$ndiff_dir" ]; then
 	if [ ! -d "$ndiff_dir" ]; then
 		"$sde_install_ndiff" -v "$ndiff_version" -d "$ndiff_dir" || \
-		  panic "cannot install ndiff"
+		  panic "cannot install ndiff" || true
 	fi
 	"$sde_cmd" pkg -d "$sde_top_dir" ndiff "$ndiff_version" || \
-	  panic "cannot configure ndiff"
+	  panic "cannot configure ndiff" || true
 fi
 
 ################################################################################
@@ -639,10 +639,10 @@ fi
 if [ -n "$aristotle_dir" ]; then
 	if [ ! -d "$aristotle_dir" ]; then
 		"$sde_install_aristotle" -v "$aristotle_version" -d "$aristotle_dir" || \
-		  panic "cannot install aristotle"
+		  panic "cannot install aristotle" || true
 	fi
 	"$sde_cmd" pkg -d "$sde_top_dir" aristotle "$aristotle_version" || \
-	  panic "cannot configure aristotle"
+	  panic "cannot configure aristotle" || true
 fi
 
 ################################################################################
@@ -652,10 +652,10 @@ fi
 if [ -n "$vim_dir" ]; then
 	if [ ! -d "$vim_dir" ]; then
 		"$sde_install_vim" -v "$vim_version" -d "$vim_dir" || \
-		  panic "cannot install vim"
+		  panic "cannot install vim" || true
 	fi
 	"$sde_cmd" pkg -d "$sde_top_dir" vim "$vim_version" || \
-	  panic "cannot configure vim"
+	  panic "cannot configure vim" || true
 fi
 
 ################################################################################
@@ -671,7 +671,7 @@ if [ -n "$vimlsp_dir" ]; then
 		  -v "asyncomplete-lsp.vim:$vimlsp_aclsp_version"
 	fi
 	"$sde_cmd" pkg -d "$sde_top_dir" vimlsp "$vimlsp_version" || \
-	  panic "cannot configure vim-lsp"
+	  panic "cannot configure vim-lsp" || true
 fi
 
 ################################################################################
@@ -694,10 +694,10 @@ if [ -n "$ycm_dir" ]; then
 		  CC="$clang_dir/bin/clang ${lib_options[@]}" \
 		  PATH="$clang_dir/bin:$PATH" \
 		  "$sde_install_ycm" -v "$ycm_version" -d "$ycm_dir" "${options[@]}" || \
-		  panic "cannot install ycm"
+		  panic "cannot install ycm" || true
 	fi
 	"$sde_cmd" pkg -d "$sde_top_dir" ycm "$ycm_version" || \
-	  panic "cannot configure ycm"
+	  panic "cannot configure ycm" || true
 fi
 
 ################################################################################

@@ -570,10 +570,10 @@ if [ -n "$spl_dir" ]; then
 		fi
 		PATH="$gcc_bin_dir:${path_string}$PATH" \
 		  "$sde_install_spl" -v "$spl_version" -d "$spl_dir" "${options[@]}" || \
-		  panic "cannot install SPL"
+		  panic "cannot install SPL" || true 
 	fi
 	"$sde_cmd" pkg -d "$sde_top_dir" SPL "$spl_version" || \
-	  panic "cannot configure SPL"
+	  panic "cannot configure SPL" || true
 fi
 
 ################################################################################
