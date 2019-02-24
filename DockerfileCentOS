@@ -7,4 +7,4 @@ WORKDIR /sde
 COPY / .
 
 # Make new directory for installation
-RUN chmod +x installerDLI && ./installerDLI -d /usr/local/sde -e default -f || true
+RUN ./installerDLI -d /usr/local/sde -e default -f || true

@@ -62,7 +62,6 @@ full-build:
     - master
   tags:
     - seng475
-  when: manual
 
 full-build-centos-epic:
   stage: build
@@ -72,6 +71,7 @@ full-build-centos-epic:
     - docker push grandfleet/seng475-sde:fullsdeost
   only:
     - master
+  when: manual
     
 full-build-centos:
   stage: test
