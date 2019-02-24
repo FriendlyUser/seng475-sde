@@ -64,7 +64,7 @@ full-build:
     - seng475
   when: manual
 
-full-build:
+full-build-centos:
   stage: test
   script:
     - docker build -t grandfleet/seng475-sde:fullsdeos -f DockerfileCentOS .
@@ -74,7 +74,6 @@ full-build:
     - master
   tags:
     - seng475
-  when: manual
   
 release-tagged-image-tl:
   stage: build
