@@ -15,7 +15,7 @@ texinfo \
 libeigen3-dev \
 libcgal-dev \ 
 gdb \
-reeglut3-dev \
+freeglut3-dev \
 libgl1-mesa-dev 
 
 # https://github.com/PX4/Firmware/issues/6408
