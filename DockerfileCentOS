@@ -1,10 +1,10 @@
 FROM centos:6
 
-RUN yum install -y  ca-certificates \
+RUN yum -y update &&  yum -y install yum-utils && yum -y groupinstall development && yum -y install https://centos7.iuscommunity.org/ius-release.rpm && yum install -y ca-certificates \
 wget \ 
 xz-utils \
-python-dev \
-python3 \
+python27u \
+python36u \
 git \ 
 texinfo \
 libeigen3-dev \
