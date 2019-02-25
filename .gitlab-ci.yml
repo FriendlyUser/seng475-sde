@@ -72,9 +72,9 @@ full-build-nighttime:
     - docker push grandfleet/seng475-sde:fullsde
   only:
     - master
+    - schedules
   tags:
     - seng475
-  when: schedules
   
 full-build-centos-epic:
   stage: build
@@ -95,7 +95,7 @@ full-build-centos:
   only:
     - master
     
-full-build-centos:
+full-build-centos-2:
   stage: test
   script:
     - docker build -t grandfleet/seng475-sde:fullsdeos -f DockerfileCentOS .
