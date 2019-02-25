@@ -71,7 +71,6 @@ full-build-nighttime:
     - docker tag grandfleet/seng475-sde:fullsde grandfleet/seng475-sde:fullsde
     - docker push grandfleet/seng475-sde:fullsde
   only:
-    - master
     - schedules
   tags:
     - seng475
