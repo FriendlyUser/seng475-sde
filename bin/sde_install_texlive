@@ -122,7 +122,7 @@ if [ "$version" != "$current_version" ]; then
 fi
 
 cat > "$profile" <<- EOF
-selected_scheme scheme-small
+selected_scheme scheme-minimal
 TEXDIR $install_dir
 TEXMFSYSCONFIG $install_dir/texmf-config
 TEXMFLOCAL $install_dir/texmf-local
