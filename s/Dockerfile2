@@ -3,9 +3,9 @@ FROM registry.gitlab.com/tex-docs/seng475-docker/seng475:sdeBase
 # Navigate to existing install directory
 RUN cd /usr/local/sde/bin
 # Give permissions
-RUN chmod +x sde_make_setup && chmod +x ../etc/environments/base
+RUN chmod +x ./sde_make_setup && chmod +x ../etc/environments/base
 # Active sde
-RUN  - ./sde_make_setup -n base -s bash
+RUN  ./sde_make_setup -n base -s bash
 # Back to root 
 RUN cd ~
 
