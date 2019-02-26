@@ -35,6 +35,7 @@ build-test:
     - cmake --version || true && clang --version || true
     - tlgmr --version || true
     - gcc --version 
+  when: manual 
 
 # Got up to tex live 
 release-tagged-image:
@@ -77,9 +78,9 @@ full-build:
 full-build-nighttime:
   stage: build
   script:
-    - docker build -t grandfleet/seng475-sde:fullsde .
-    - docker tag grandfleet/seng475-sde:fullsde grandfleet/seng475-sde:fullsde
-    - docker push grandfleet/seng475-sde:fullsde
+    - docker build -t grandfleet/seng475-sde:latest .
+    - docker tag grandfleet/seng475-sde:fullsde grandfleet/seng475-sde:latest
+    - docker push grandfleet/seng475-sde:latest
   only:
     - schedules
   tags:
