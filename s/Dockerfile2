@@ -1,0 +1,26 @@
+FROM registry.gitlab.com/seng475-sde/seng475-docker/seng475:sdeBase
+
+
+# Activate the environment 
+
+
+# Navigate to existing install directory
+RUN cd /usr/local/sde/bin
+# Give permissions
+RUN chmod +x sde_make_setup && chmod +x ../etc/environments/base
+# Active sde
+RUN  - ./sde_make_setup -n base -s bash
+# Back to root 
+RUN cd ~
+WORKDIR /sde
+# Copy the installation files over
+COPY / .
+RUN ls
+
+
+- 
+    - 
+    - 
+
+# Make new directory for installation
+RUN chmod +x installer && installer -d /usr/local/sde -e default -f || true

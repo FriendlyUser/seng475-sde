@@ -1,160 +1,74 @@
-# This file is a template, and might need editing before it works on your project.
-# Official docker image.
 image: docker:latest
-
-stages:
-  - build
-  - test 
 
 services:
   - docker:dind
 
+stages:
+  - build1to3
+  - buildcmake
+  - buildgccclang
+  - buildboost
+  - buildcgal
+  - buildgdb
+
+
 variables:
-  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
-# Protected variables were not available in non-protected branch lol.
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
+  CI_REGISTRY: registry.gitlab.com
+  PROJECT_NAME: seng475-sde/seng475-docker
+  CI_REGISTRY_IMAGE: seng475
+  IMAGE_TAG1: seng475:sdeBase
+  IMAGE_TAG2: seng475:sdeOther
+  IMAGE_TAG3: seng475:yumExtras
+  IMAGE_TAG4: seng475:cmake 
+  IMAGE_TAG5: seng475:gcc
+  IMAGE_TAG6: seng475:clang
+  IMAGE_TAG7: seng475:boost
+  IMAGE_TAG8: seng475:cgal
+  IMAGE_TAG9: seng475:gdb
+  IMAGE_TAG10: seng475:lcov
+  IMAGE_TAG11: seng475:texlive
+  IMAGE_TAG12: seng475:jasper
+  IMAGE_TAG13: seng475:spl
+  IMAGE_TAG14: seng475:gsl
+  IMAGE_TAG15: seng475:catch2
+  IMAGE_TAG16: seng475:Ndiff
+  IMAGE_TAG17: seng475:Aristole
+  IMAGE_TAG18: seng475:Vim
+
 before_script:
-  - docker info | grep Registr
-  - echo "${CI_REGISTRY_PASSWORD}" | docker login -u "${CI_REGISTRY_USER}" --password-stdin "${CI_REGISTRY}"
+  - docker login -u gitlab-ci-token -p $GL_TOKEN $CI_REGISTRY
 
-build:
-  stage: build
+buildbaseandextras:
+  stage: build1to3
+  before_script:
+    - rm installer
+    - rm Dockerfile
+    - mv s/Dockerfile1 Dockerfile
+    - mv s/install1 installer
   script:
-    - docker build -t grandfleet/seng475-sde:latest .
-    - docker tag grandfleet/seng475-sde:latest grandfleet/seng475-sde:latest
-    - docker push grandfleet/seng475-sde:latest
-  when: manual
-  tags:
-    - seng475
+    - docker build -t registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG1 . 
+    - docker push registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG1
 
-# test deployed image
-build-test:
-  stage: build
-  image: grandfleet/seng475-sde:fullsde
+buildcmake:
+  stage: buildcmake
+  before_script:
+    - rm installer
+    - rm Dockerfile
+    - mv s/Dockerfile2 Dockerfile
+    - mv s/install2 installer
   script:
-    - bin/sde_make_setup -s bash
-    - cmake --version || true && clang --version || true
-    - tlgmr --version || true
-    - gcc --version 
-  when: manual 
+    - docker build -t registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG4 . 
+    - docker push registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG4
 
-# Got up to tex live 
-release-tagged-image:
-  stage: build
+buildcmake:
+  stage: buildgccclang
+  before_script:
+    - rm installer
+    - rm Dockerfile
+    - mv s/Dockerfile3 Dockerfile
+    - mv s/install3 installer
   script:
-    - docker build -t grandfleet/seng475-sde:HLBF2019 .
-    - docker tag grandfleet/seng475-sde:HLBF2019 grandfleet/seng475-sde:HLBF2019
-    - docker push grandfleet/seng475-sde:HLBF2019
-  only:
-    - master
-  tags:
-    - seng475
-  when: manual
-
-boost-and-after:
-  stage: build
-  script:
-    - docker build -t grandfleet/seng475-sde:AfterBoostsde -f DockerfileBoost .
-    - docker tag grandfleet/seng475-sde:AfterBoostsde grandfleet/seng475-sde:AfterBoostsde
-    - docker push grandfleet/seng475-sde:AfterBoostsde
-  only:
-    - master
-  tags:
-    - seng475
-  allow_failure: true
-  when: manual
-
-full-build:
-  stage: build
-  script:
-    - docker build -t grandfleet/seng475-sde:02252019 .
-    - docker tag grandfleet/seng475-sde:02252019 grandfleet/seng475-sde:02252019
-    - docker push grandfleet/seng475-sde:02252019
-  only:
-    - master
-  tags:
-    - seng475
-  when: manual 
-
-full-build-nighttime:
-  stage: build
-  script:
-    - docker build -t grandfleet/seng475-sde:latest .
-    - docker tag grandfleet/seng475-sde:fullsde grandfleet/seng475-sde:latest
-    - docker push grandfleet/seng475-sde:latest
-  only:
-    - schedules
-  tags:
-    - seng475
-  
-full-build-centos-epic:
-  stage: build
-  script:
-    - docker build -t grandfleet/seng475-sde:fullsdeost -f DockerfileCentOS .
-    - docker tag grandfleet/seng475-sde:fullsdeost grandfleet/seng475-sde:fullsdeost
-    - docker push grandfleet/seng475-sde:fullsdeost
-  only:
-    - master
-  when: manual
-
-full-build-centos:
-  stage: test
-  script:
-    - docker build -t grandfleet/seng475-sde:fullsdeos -f DockerfileAgain .
-    - docker tag grandfleet/seng475-sde:fullsdeos grandfleet/seng475-sde:fullsdeos
-    - docker push grandfleet/seng475-sde:fullsdeos
-  only:
-    - master
-    
-full-build-centos-2:
-  stage: test
-  script:
-    - docker build -t grandfleet/seng475-sde:fullsdeos -f DockerfileCentOS .
-    - docker tag grandfleet/seng475-sde:fullsdeos grandfleet/seng475-sde:fullsdeos
-    - docker push grandfleet/seng475-sde:fullsdeos
-  only:
-    - master
-  tags:
-    - seng475
-  dependencies:
-    - full-build
-  when: manual
-  
-release-tagged-image-tl:
-  stage: build
-  script:
-    - docker build -t grandfleet/seng475-sde:tTL02212019 .
-    - docker tag grandfleet/seng475-sde:tTL02212019 grandfleet/seng475-sde:tTL02212019
-    - docker push grandfleet/seng475-sde:tTL02212019
-  only:
-    - master
-  when: manual
-  tags:
-    - seng475
-
-gitlab-runner-test:
-  stage: build
-  script:
-    - docker build -t grandfleet/seng475-sde:V0.0.15 -f DockerfileHalfInstallFull .
-    - docker tag grandfleet/seng475-sde:V0.0.15 grandfleet/seng475-sde:V0.0.15
-    - docker push grandfleet/seng475-sde:V0.0.15
-  only:
-    - master
-  when: manual
-
-gitlab-runner-test-tl:
-  stage: build
-  script:
-    - docker build -t grandfleet/seng475-sde:V0.0.3 -f DockerfileTexLiveInstall .
-    - docker tag grandfleet/seng475-sde:V0.0.3 grandfleet/seng475-sde:V0.0.3
-    - docker push grandfleet/seng475-sde:V0.0.3
-  only:
-    - master
-  when: manual
-    
-test-install:
-  stage: test
-  image: grandfleet/seng475-sde:4.0.13  
-  script:
-    - gcc --version 
-    - cmake --version
-  when: manual
+    - docker build -t registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG6  . 
+    - docker push registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG6

@@ -1,0 +1,8 @@
+FROM registry.gitlab.com/seng475-sde/seng475-docker/seng475:cmake
+
+# Copy the installation files over
+COPY / .
+RUN ls
+
+# Make new directory for installation
+RUN chmod +x iterativebuild/install3 && iterativebuild/install3 -d /usr/local/sde -e default -f || true
