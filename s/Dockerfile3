@@ -1,8 +1,18 @@
 FROM registry.gitlab.com/tex-docs/seng475-docker/seng475:cmake
 
+# Navigate to existing install directory
+RUN cd /usr/local/sde/bin && ls
+# Give permissions
+RUN cd /usr/local/sde/bin && chmod +x sde_make_setup && chmod +x ../etc/environments/base
+# Active sde
+RUN  cd /usr/local/sde/bin && ls && ./sde_make_setup -n base -s bash
+# Back to root 
+RUN cd ~
+
+WORKDIR /sde
 # Copy the installation files over
 COPY / .
 RUN ls
 
-# Make new directory for installation
-RUN chmod +x iterativebuild/install3 && iterativebuild/install3 -d /usr/local/sde -e default -f || true
+# Use existing directory for install 
+RUN chmod +x installer && ./installer -d /usr/local/sde -e default -f || true

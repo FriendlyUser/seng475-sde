@@ -15,4 +15,4 @@ COPY / .
 RUN ls
 
 # Use existing directory for install 
-RUN chmod +x installer && installer -d /usr/local/sde -e default -f || true
+RUN chmod +x installer && ./installer -d /usr/local/sde -e default -f || true
