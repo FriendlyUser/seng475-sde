@@ -37,8 +37,6 @@ variables:
   IMAGE_TAG17: seng475:Aristole
   IMAGE_TAG18: seng475:Vim
 
-before_script:
-  - docker login -u gitlab-ci-token -p $GL_TOKEN $CI_REGISTRY
 
 buildbaseandextras:
   stage: build1to3
@@ -47,6 +45,7 @@ buildbaseandextras:
     - rm Dockerfile
     - mv s/Dockerfile1 Dockerfile
     - mv s/install1 installer
+    - docker login -u gitlab-ci-token -p $GL_TOKEN $CI_REGISTRY
   script:
     - docker build -t registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG1 . 
     - docker push registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG1
@@ -58,6 +57,7 @@ buildcmake:
     - rm Dockerfile
     - mv s/Dockerfile2 Dockerfile
     - mv s/install2 installer
+    - docker login -u gitlab-ci-token -p $GL_TOKEN $CI_REGISTRY
   script:
     - docker build -t registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG4 . 
     - docker push registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG4
@@ -69,6 +69,7 @@ buildcmake:
     - rm Dockerfile
     - mv s/Dockerfile3 Dockerfile
     - mv s/install3 installer
+    - docker login -u gitlab-ci-token -p $GL_TOKEN $CI_REGISTRY
   script:
     - docker build -t registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG6  . 
     - docker push registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG6
