@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/seng475-sde/seng475-docker/seng475:sdeBase
+FROM registry.gitlab.com/tex-docs/seng475-docker/seng475:sdeBase
 
 # Navigate to existing install directory
 RUN cd /usr/local/sde/bin

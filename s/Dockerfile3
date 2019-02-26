@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/seng475-sde/seng475-docker/seng475:cmake
+FROM registry.gitlab.com/tex-docs/seng475-docker/seng475:cmake
 
 # Copy the installation files over
 COPY / .
