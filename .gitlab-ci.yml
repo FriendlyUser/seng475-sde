@@ -62,7 +62,7 @@ buildcmake:
     - docker build -t registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG4 . 
     - docker push registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG4
 
-buildcmake:
+build-gcc-clang:
   stage: buildgccclang
   before_script:
     - rm installer
