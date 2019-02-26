@@ -65,9 +65,9 @@ boost-and-after:
 full-build:
   stage: build
   script:
-    - docker build -t grandfleet/seng475-sde:fullsde .
-    - docker tag grandfleet/seng475-sde:fullsde grandfleet/seng475-sde:fullsde
-    - docker push grandfleet/seng475-sde:fullsde
+    - docker build -t grandfleet/seng475-sde:02252019 .
+    - docker tag grandfleet/seng475-sde:02252019 grandfleet/seng475-sde:02252019
+    - docker push grandfleet/seng475-sde:02252019
   only:
     - master
   tags:
