@@ -48,8 +48,8 @@ buildbaseandextras:
     - mv s/Dockerfile1 Dockerfile
     - mv s/install1 installer
   script:
-    - docker build -t registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG1 . 
-    - docker push registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG1
+    - docker build -t registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG1 . 
+    - docker push registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG1
 
 buildcmake:
   stage: buildcmake
@@ -59,8 +59,8 @@ buildcmake:
     - mv s/Dockerfile2 Dockerfile
     - mv s/install2 installer
   script:
-    - docker build -t registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG4 . 
-    - docker push registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG4
+    - docker build -t registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG4 . 
+    - docker push registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG4
 
 buildcmake:
   stage: buildgccclang
@@ -70,5 +70,5 @@ buildcmake:
     - mv s/Dockerfile3 Dockerfile
     - mv s/install3 installer
   script:
-    - docker build -t registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG6  . 
-    - docker push registry.gitlab.com/seng475-sde/seng475-docker/$IMAGE_TAG6
+    - docker build -t registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG6  . 
+    - docker push registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG6

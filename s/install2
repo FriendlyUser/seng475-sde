@@ -260,7 +260,7 @@ fi
 
 cat <<- EOF
 ============================================================
-SDE installation complete
+SDE installation complete step 2
 Time: $(date +"%Y-%m-%d %H:%M:%S")
 ============================================================
 EOF
