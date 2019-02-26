@@ -26,6 +26,16 @@ build:
   tags:
     - seng475
 
+# test deployed image
+build-test:
+  stage: build
+  image: grandfleet/seng475-sde:fullsde
+  script:
+    - bin/sde_make_setup -s bash
+    - cmake --version || true && clang --version || true
+    - tlgmr --version || true
+    - gcc --version 
+
 # Got up to tex live 
 release-tagged-image:
   stage: build
