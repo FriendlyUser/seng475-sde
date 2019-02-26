@@ -5,8 +5,8 @@ services:
 
 stages:
   - build1to3
-  - buildcmake
-  - buildgccclang
+  - buildcmakegcc
+  - buildclang
   - buildboost
   - buildcgal
   - buildgdb
@@ -21,7 +21,7 @@ variables:
   IMAGE_TAG1: seng475:sdeBase
   IMAGE_TAG2: seng475:sdeOther
   IMAGE_TAG3: seng475:yumExtras
-  IMAGE_TAG4: seng475:cmake 
+  IMAGE_TAG4: seng475:cmakegcc
   IMAGE_TAG5: seng475:gcc
   IMAGE_TAG6: seng475:clang
   IMAGE_TAG7: seng475:boost
@@ -38,20 +38,20 @@ variables:
   IMAGE_TAG18: seng475:Vim
 
 
-buildbaseandextras:
-  stage: build1to3
-  before_script:
-    - rm installer
-    - rm Dockerfile
-    - mv s/Dockerfile1 Dockerfile
-    - mv s/install1 installer
-    - docker login -u gitlab-ci-token -p $GL_TOKEN $CI_REGISTRY
-  script:
-    - docker build -t registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG1 . 
-    - docker push registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG1
+# buildbaseandextras:
+#   stage: build1to3
+#   before_script:
+#     - rm installer
+#     - rm Dockerfile
+#     - mv s/Dockerfile1 Dockerfile
+#     - mv s/install1 installer
+#     - docker login -u gitlab-ci-token -p $GL_TOKEN $CI_REGISTRY
+#   script:
+#     - docker build -t registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG1 . 
+#     - docker push registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG1
 
 buildcmake:
-  stage: buildcmake
+  stage: buildcmakegcc
   before_script:
     - rm installer
     - rm Dockerfile
@@ -63,7 +63,7 @@ buildcmake:
     - docker push registry.gitlab.com/tex-docs/seng475-docker/$IMAGE_TAG4
 
 build-gcc-clang:
-  stage: buildgccclang
+  stage: buildclang
   before_script:
     - rm installer
     - rm Dockerfile

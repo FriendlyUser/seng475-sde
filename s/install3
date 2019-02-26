@@ -238,20 +238,6 @@ path="$boot_dir:$PATH"
 export PATH="$path"
 
 ################################################################################
-# Install GCC
-################################################################################
-
-if [ -n "$gcc_dir" ]; then
-	if [ ! -d "$gcc_dir" ]; then
-		"$sde_install_gcc" -v "$gcc_version" -d "$gcc_dir" \
-		  "${gcc_install_options[@]}" || \
-		  panic "cannot install gcc"
-	fi
-	"$sde_cmd" pkg -d "$sde_top_dir" gcc "$gcc_version" || \
-	  panic "cannot configure gcc"
-fi
-
-################################################################################
 # Install Clang
 ################################################################################
 
