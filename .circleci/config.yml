@@ -18,12 +18,12 @@ jobs:
       - run:
           name: Moving Stage 1 Files Around
           command: |
+            ls
             rm installer
             rm Dockerfile
-            cd s
             ls
-            mv ./Dockerfile1 ../Dockerfile
-            mv ./install1 ../installer
+            mv ./s/Dockerfile1 ./Dockerfile
+            mv ./s/install1 ./installer
             cd ../
       - run:
           name: Build Docker image to GCC
@@ -35,7 +35,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - ./images1.tar
+            - ./image1.tar
   build-clang:
     executor: docker-publisher
     steps:
