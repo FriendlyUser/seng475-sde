@@ -53,11 +53,11 @@ jobs:
             docker build -t $IMAGE_NAME:$STEP_2 .
       - run:
           name: Archive Docker image
-          command: docker save -o images2.tar $IMAGE_NAME:$STEP_2
+          command: docker save -o image2.tar $IMAGE_NAME:$STEP_2
       - persist_to_workspace:
           root: .
           paths:
-            - ./images2.tar
+            - ./image2.tar
   build-texlive-jasper:
     executor: docker-publisher
     working_directory: ~/texlive
