@@ -20,11 +20,10 @@ jobs:
           command: |
             rm installer
             rm Dockerfile
-            ls
             cd s
             ls
-            mv ./Dockerfile ../Dockerfile
-            mv ./install ../installer
+            mv ./Dockerfile1 ../Dockerfile
+            mv ./install1 ../installer
             cd ../
       - run:
           name: Build Docker image to GCC
@@ -52,8 +51,8 @@ jobs:
           command: |
             rm installer
             rm Dockerfile
-            mv s/Dockerfile2 Dockerfile
-            mv s/install2 installer
+            mv ./s/Dockerfile2 Dockerfile
+            mv ./s/install2 installer
       - run:
           name: Build Clang in Docker Image
           command: |
