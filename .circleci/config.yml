@@ -40,11 +40,9 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp/workspace
-      - setup_remote_docker
       - run:
           name: Load archived Docker image
           command: docker load -i /tmp/workspace/image1.tar
-      - setup_remote_docker
       - run:
           name: Moving stage 2 files and build dockerfile
           command: |
@@ -66,11 +64,9 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp/workspace
-      - setup_remote_docker
       - run:
           name: Load archived Docker image
           command: docker load -i /tmp/workspace/image2.tar
-      - setup_remote_docker
       - run:
           name: Moving Stage 3 Files Around
           command: |
