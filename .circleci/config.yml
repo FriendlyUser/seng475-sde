@@ -20,8 +20,12 @@ jobs:
           command: |
             rm installer
             rm Dockerfile
-            mv s/Dockerfile Dockerfile
-            mv s/install installer
+            ls
+            cd s
+            ls
+            mv ./Dockerfile ../Dockerfile
+            mv ./install ../installer
+            cd ../
       - run:
           name: Build Docker image to GCC
           command: |
