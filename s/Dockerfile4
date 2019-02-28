@@ -1,4 +1,4 @@
-FROM grandfleet/seng475-sde:clang
+FROM grandfleet/seng475-sde:texlive-jasper
 
 # Navigate to existing install directory
 RUN cd /usr/local/sde/bin && ls

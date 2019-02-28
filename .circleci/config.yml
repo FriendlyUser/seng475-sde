@@ -3,25 +3,120 @@ executors:
   docker-publisher:
     environment:
       IMAGE_NAME: grandfleet/seng475-sde
+      STEP_1: gcc-cmake
+      STEP_2: clang
+      STEP_3: texlive-jasper
+      STEP_4: rest-done
     docker:
       - image: circleci/buildpack-deps:stretch
 jobs:
-  build:
+  build-gcc:
     executor: docker-publisher
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: Build Docker image
+          name: Moving Stage 1 Files Around
           command: |
-            docker build -t $IMAGE_NAME:circleCI .
+            rm installer
+            rm Dockerfile
+            mv s/Dockerfile Dockerfile
+            mv s/install installer
+      - run:
+          name: Build Docker image to GCC
+          command: |
+            docker build -t $IMAGE_NAME:$STEP_1 .
       - run:
           name: Archive Docker image
-          command: docker save -o image.tar $IMAGE_NAME
+          command: docker save -o images1.tar $IMAGE_NAME:$STEP_1
       - persist_to_workspace:
           root: .
           paths:
-            - ./image.tar
+            - ./images1.tar
+  build-clang:
+    executor: docker-publisher
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - setup_remote_docker
+      - run:
+          name: Load archived Docker image
+          command: docker load -i /tmp/workspace/image1.tar
+      - setup_remote_docker
+      - run:
+          name: Moving stage 2 files
+          command: |
+            rm installer
+            rm Dockerfile
+            mv s/Dockerfile2 Dockerfile
+            mv s/install2 installer
+      - run:
+          name: Build Clang in Docker Image
+          command: |
+            docker build -t $IMAGE_NAME:$STEP_2 .
+      - run:
+          name: Archive Docker image
+          command: docker save -o images2.tar $IMAGE_NAME:$STEP_2
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./images2.tar
+  build-texlive-jasper:
+    executor: docker-publisher
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - setup_remote_docker
+      - run:
+          name: Load archived Docker image
+          command: docker load -i /tmp/workspace/image2.tar
+      - setup_remote_docker
+      - run:
+          name: Moving Stage 3 Files Around
+          command: |
+            rm installer
+            rm Dockerfile
+            mv s/Dockerfile3 Dockerfile
+            mv s/install3 installer
+      - run:
+          name: Building Docker Image with texlive and jasper
+          command: |
+            docker build -t $IMAGE_NAME:$STEP_3 .
+      - run:
+          name: Archive Docker image
+          command: docker save -o images3.tar $IMAGE_NAME:$STEP_3
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./images3.tar
+  build-rest:
+    executor: docker-publisher
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - setup_remote_docker
+      - run:
+          name: Load archived Docker image
+          command: docker load -i /tmp/workspace/image3.tar
+      - setup_remote_docker
+      - run:
+          name: Moving Stage 4 Files Around
+          command: |
+            rm installer
+            rm Dockerfile
+            mv s/Dockerfile4 Dockerfile
+            mv s/install4 installer
+      - run:
+          name: Building remaining code
+          command: |
+            docker build -t $IMAGE_NAME:$STEP_4 .
+      - run:
+          name: Archive Docker image
+          command: docker save -o images4.tar $IMAGE_NAME:$STEP_4
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./images4.tar
   publish-latest:
     executor: docker-publisher
     steps:
@@ -30,15 +125,15 @@ jobs:
       - setup_remote_docker
       - run:
           name: Load archived Docker image
-          command: docker load -i /tmp/workspace/image.tar
+          command: docker load -i /tmp/workspace/image4.tar
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             IMAGE_TAG="0.0.${CIRCLE_BUILD_NUM}"
-            docker tag $IMAGE_NAME:circleCI $IMAGE_NAME:$IMAGE_TAG
+            docker tag $IMAGE_NAME:$STEP_4 $IMAGE_NAME:circleCI
             docker push $IMAGE_NAME:circleCI
-            docker push $IMAGE_NAME:$IMAGE_TAG
+            docker push $IMAGE_NAME:latest
   publish-tag:
     executor: docker-publisher
     steps:
@@ -60,19 +155,69 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - build:
+      - build-gcc:
+          filters:
+            branches:
+              only: master
+      - build-clang:
+          requires:
+            - build-gcc
+          filters:
+            branches:
+              only: master
+      - build-texlive-jasper:
+          requires:
+            - build-clang
+          filters:
+            branches:
+              only: master
+      - build-rest:
+          requires:
+            - build-texlive-jasper
           filters:
             branches:
               only: master
       - publish-latest:
           requires:
-            - build
+            - build-rest
           filters:
             branches:
               only: master
   build-tags:
     jobs:
-      - build:
+      - build-gcc:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+       - build-clang:
+          requires:
+            - build-gcc
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - build-texlive-jasper:
+          requires:
+            - build-clang
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - build-rest:
+          requires:
+            - build-texlive-jasper
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - publish-latest:
+          requires:
+            - build-rest
           filters:
             tags:
               only: /^v.*/
@@ -80,7 +225,7 @@ workflows:
               ignore: /.*/
       - publish-tag:
           requires:
-            - build
+            - build-gcc
           filters:
             tags:
               only: /^v.*/

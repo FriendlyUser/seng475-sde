@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/tex-docs/seng475-docker/seng475:sdeBase
+FROM grandfleet/seng475-sde:gcc-cmake
 
 # Navigate to existing install directory
 RUN cd /usr/local/sde/bin && ls
