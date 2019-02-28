@@ -9,9 +9,11 @@ executors:
       STEP_4: rest-done
     docker:
       - image: circleci/buildpack-deps:stretch
+
 jobs:
   build-gcc:
     executor: docker-publisher
+    working_directory: ~/gcc
     steps:
       - checkout
       - setup_remote_docker
@@ -34,6 +36,7 @@ jobs:
             - ./image1.tar
   build-clang:
     executor: docker-publisher
+    working_directory: ~/clang
     steps:
       - attach_workspace:
           at: /tmp/workspace
@@ -59,6 +62,7 @@ jobs:
             - ./images2.tar
   build-texlive-jasper:
     executor: docker-publisher
+    working_directory: ~/texlive
     steps:
       - attach_workspace:
           at: /tmp/workspace
@@ -84,6 +88,7 @@ jobs:
             - ./images3.tar
   build-rest:
     executor: docker-publisher
+    working_directory: ~/rest
     steps:
       - attach_workspace:
           at: /tmp/workspace
