@@ -191,7 +191,7 @@ workflows:
               only: /^v.*/
             branches:
               ignore: /.*/
-       - build-clang:
+      - build-clang:
           requires:
             - build-gcc
           filters:
