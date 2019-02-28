@@ -9,6 +9,7 @@ executors:
       STEP_4: rest-done
     docker:
       - image: circleci/buildpack-deps:stretch
+    working_directory: /tmp
 jobs:
   build-gcc:
     executor: docker-publisher
@@ -24,7 +25,6 @@ jobs:
             ls
             mv ./s/Dockerfile1 ./Dockerfile
             mv ./s/install1 ./installer
-            cd ../
             docker build -t $IMAGE_NAME:$STEP_1 .
       - run:
           name: Archive Docker image
