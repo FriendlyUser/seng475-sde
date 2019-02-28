@@ -29,7 +29,7 @@ jobs:
             docker build -t $IMAGE_NAME:$STEP_1 .
       - run:
           name: Archive Docker image
-          command: docker save -o images1.tar $IMAGE_NAME:$STEP_1
+          command: docker save -o image1.tar $IMAGE_NAME:$STEP_1
       - persist_to_workspace:
           root: .
           paths:
