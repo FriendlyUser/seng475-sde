@@ -16,7 +16,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Moving Stage 1 Files Around
+          name: Moving Stage 1 Files Around and build docker file
           command: |
             ls
             rm installer
@@ -25,9 +25,6 @@ jobs:
             mv ./s/Dockerfile1 ./Dockerfile
             mv ./s/install1 ./installer
             cd ../
-      - run:
-          name: Build Docker image to GCC
-          command: |
             docker build -t $IMAGE_NAME:$STEP_1 .
       - run:
           name: Archive Docker image
@@ -47,15 +44,12 @@ jobs:
           command: docker load -i /tmp/workspace/image1.tar
       - setup_remote_docker
       - run:
-          name: Moving stage 2 files
+          name: Moving stage 2 files and build dockerfile
           command: |
             rm installer
             rm Dockerfile
             mv ./s/Dockerfile2 Dockerfile
             mv ./s/install2 installer
-      - run:
-          name: Build Clang in Docker Image
-          command: |
             docker build -t $IMAGE_NAME:$STEP_2 .
       - run:
           name: Archive Docker image
@@ -79,11 +73,8 @@ jobs:
           command: |
             rm installer
             rm Dockerfile
-            mv s/Dockerfile3 Dockerfile
-            mv s/install3 installer
-      - run:
-          name: Building Docker Image with texlive and jasper
-          command: |
+            mv ./s/Dockerfile3 Dockerfile
+            mv ./s/install3 installer
             docker build -t $IMAGE_NAME:$STEP_3 .
       - run:
           name: Archive Docker image
@@ -109,9 +100,6 @@ jobs:
             rm Dockerfile
             mv s/Dockerfile4 Dockerfile
             mv s/install4 installer
-      - run:
-          name: Building remaining code
-          command: |
             docker build -t $IMAGE_NAME:$STEP_4 .
       - run:
           name: Archive Docker image
