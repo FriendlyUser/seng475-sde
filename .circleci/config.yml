@@ -20,12 +20,10 @@ jobs:
       - run:
           name: Moving Stage 1 Files Around and build docker file
           command: |
-            ls
             rm installer
             rm Dockerfile
-            ls
-            mv ./s/Dockerfile1 ./Dockerfile
-            mv ./s/install1 ./installer
+            mv ./s/Dockerfile1 Dockerfile
+            mv ./s/install1 installer
             docker build -t $IMAGE_NAME:$STEP_1 .
       - run:
           name: Archive Docker image
