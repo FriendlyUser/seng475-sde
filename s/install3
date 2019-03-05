@@ -267,14 +267,15 @@ df -H
 # Install GDB
 ################################################################################
 
-if [ -n "$gdb_dir" ]; then
-	if [ ! -d "$gdb_dir" ]; then
-		"$sde_install_gdb" -v "$gdb_version" -d "$gdb_dir" || \
-		  panic "cannot install gdb" || true
-	fi
-	"$sde_cmd" pkg -d "$sde_top_dir" gdb "$gdb_version" || \
-	  panic "cannot configure gdb" || true
-fi
+# Don't need debugging in docker
+# if [ -n "$gdb_dir" ]; then
+	# if [ ! -d "$gdb_dir" ]; then
+		# "$sde_install_gdb" -v "$gdb_version" -d "$gdb_dir" || \
+		  # panic "cannot install gdb" || true
+	# fi
+	# "$sde_cmd" pkg -d "$sde_top_dir" gdb "$gdb_version" || \
+	  # panic "cannot configure gdb" || true
+# fi
 
 ################################################################################
 # Install Lcov
