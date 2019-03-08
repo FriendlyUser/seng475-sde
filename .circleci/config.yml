@@ -28,6 +28,13 @@ jobs:
       - run:
           name: Archive Docker image
           command: docker save -o image1.tar $IMAGE_NAME:$STEP_1
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            STEP_1=gcc-cmake
+            docker tag $IMAGE_NAME:$STEP_1 $IMAGE_NAME:$STEP_1 || true
+            docker push $IMAGE_NAME:$STEP_1
       - persist_to_workspace:
           root: .
           paths:
@@ -54,6 +61,13 @@ jobs:
       - run:
           name: Archive Docker image
           command: docker save -o image2.tar $IMAGE_NAME:$STEP_2
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            STEP_2=clang
+            docker tag $IMAGE_NAME:$STEP_2 $IMAGE_NAME:$STEP_2 || true
+            docker push $IMAGE_NAME:$STEP_2
       - persist_to_workspace:
           root: .
           paths:
@@ -63,7 +77,7 @@ jobs:
     working_directory: ~/texlive
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp/workspace2
       - checkout
       - setup_remote_docker
       - run:
@@ -80,6 +94,13 @@ jobs:
       - run:
           name: Archive Docker image
           command: docker save -o images3.tar $IMAGE_NAME:$STEP_3
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            STEP_3=texlive-jasper
+            docker tag $IMAGE_NAME:$STEP_3 $IMAGE_NAME:$STEP_3 || true
+            docker push $IMAGE_NAME:$STEP_3
       - persist_to_workspace:
           root: .
           paths:
@@ -89,12 +110,12 @@ jobs:
     working_directory: ~/rest
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp/workspace3
       - checkout
       - setup_remote_docker
       - run:
           name: Load archived Docker image
-          command: docker load -i /tmp/workspace/image3.tar
+          command: docker load -i /tmp/workspace/images3.tar || true
       - setup_remote_docker
       - run:
           name: Moving Stage 4 Files Around
@@ -107,6 +128,13 @@ jobs:
       - run:
           name: Archive Docker image
           command: docker save -o images4.tar $IMAGE_NAME:$STEP_4
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            STEP_4=rest-done
+            docker tag $IMAGE_NAME:$STEP_4 $IMAGE_NAME:$STEP_4 || true
+            docker push $IMAGE_NAME:$STEP_4
       - persist_to_workspace:
           root: .
           paths:
