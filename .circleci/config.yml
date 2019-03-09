@@ -82,7 +82,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Load archived Docker image
-          command: docker load -i /tmp/workspace/image2.tar
+          command: docker load -i /tmp/workspace/image2.tar || true
       - run:
           name: Moving Stage 3 Files Around
           command: |
